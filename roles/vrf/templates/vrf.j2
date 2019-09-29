@@ -1,0 +1,18 @@
+{% if vrf is defined %}
+{% for vrf, value in vrf.items() %}
+ip vrf {{ vrf }}
+{% if 'rd' in value %}
+ rd {{ value.rd }}
+{% endif %}
+{% if 'rt' in value %}
+ route-target export {{ value.rt }}
+{% endif %}
+{% if 'rt' in value %}
+ route-target import {{ value.rt }}
+{# enable cef globally #}
+ip cef
+{% endif %}
+{% endfor %}
+{% endif %}
+
+

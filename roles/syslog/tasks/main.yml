@@ -1,0 +1,7 @@
+---
+
+- name: write syslog config
+  ios_config:
+    authorize: yes
+    src: "../templates/syslog.j2"
+    provider: "{{ ios_provider }}"

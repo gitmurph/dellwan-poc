@@ -1,0 +1,8 @@
+---
+
+- name: Deploy QOS Standard 
+  ios_config:
+    authorize: yes
+    src: "../templates/dellqos.j2"
+    provider: "{{ ios_provider }}"
+  tags: qos   

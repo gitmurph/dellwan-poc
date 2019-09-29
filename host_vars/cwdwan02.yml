@@ -1,0 +1,119 @@
+---
+
+hostname: cwdwan02
+domain_name: networks.dell.com
+
+loopback:
+  address: 172.1.0.112
+  mask: 255.255.255.255
+
+
+vrf:
+
+  dellcorp-labs:
+    rd: 64712:1301
+    rt: 64712:1301
+
+  dellicorp-odm:
+    rd: 64712:1401
+    rt: 64712:1401 
+
+  dellicorp-osp:
+    rd: 64712:1101
+    rt: 64712:1101
+
+  dellicorp-svc:
+    rd: 64712:1201
+    rt: 64712:1201
+
+
+
+interfaces: 
+
+  0/1.1:
+    alias: sp-BT bw-250M ty-MPLS id-W0Z61461 loc-CWD
+    bandwidth: 250000
+    qosbw: 250000
+    vlan: 100
+    address: 192.168.210.2
+    mask: 255.255.255.0
+
+
+  0/1.101:
+    alias: sp-BT  bw-250M ty-MPLS id-W0Z61461 loc-CWD
+    bandwidth: 250000
+    vlan: 1101
+    address: 192.168.110.2
+    mask: 255.255.255.0
+    intvrf: dellicorp-osp   
+
+
+  0/1.201:
+    alias: sp-BT  bw-250M ty-MPLS id-W0Z61461 loc-CWD
+    bandwidth: 250000
+    vlan: 1201
+    address: 192.168.120.2
+    mask: 255.255.255.0
+    intvrf: dellicorp-svc  
+
+  0/1.301:
+    alias: sp-BT  bw-250M ty-MPLS id-W0Z61461 loc-CWD
+    bandwidth: 250000
+    vlan: 1301
+    address: 192.168.130.2
+    mask: 255.255.255.0
+    intvrf: dellcorp-labs
+
+
+  0/1.401:
+    alias: sp-BT  bw-250M ty-MPLS id-W0Z61461 loc-CWD
+    bandwidth: 250000
+    vlan: 1401
+    address: 192.168.140.2
+    mask: 255.255.255.0
+    intvrf: dellicorp-odm
+
+
+  0/2.110:
+    alias: vlan110
+    vlan: 110
+    address: 10.10.110.2
+    mask: 255.255.255.0
+
+  0/2.120:
+    alias: vlan120
+    vlan: 120
+    address: 10.10.120.2
+    mask: 255.255.255.0
+
+  0/2.130:
+    alias: vlan130
+    vlan: 130
+    address: 10.10.130.2
+    mask: 255.255.255.0
+
+
+  0/2.140:
+    alias: vlan140 
+    vlan: 140
+    address: 10.10.140.2
+    mask: 255.255.255.0
+
+
+bgp:
+  asn: 64712
+  neighbor:
+    - {address: 192.168.210.1, remote_as: 12641, act: activate}
+
+
+  ipv4: 
+    - {pe: 192.168.130.110, remote_as: 12641, cvrf: dellcorp-labs}
+    - {pe: 192.168.140.120, remote_as: 12641, cvrf: dellicorp-odm}
+    - {pe: 192.168.110.130, remote_as: 12641, cvrf: dellicorp-osp}
+    - {pe: 192.168.120.140, remote_as: 12641, cvrf: dellicorp-svc}
+
+
+ospf:
+   proc: 1
+   networks:
+    - {network: 10.0.0.0, mask: 0.255.255.255, area: 0}

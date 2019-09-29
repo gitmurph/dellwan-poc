@@ -1,0 +1,38 @@
+---
+
+ios_provider:
+  username: "{{ un }}"
+  password: "{{ pw }}"
+  host: "{{ inventory_hostname }}"
+
+
+infrasource: Loopback0
+
+syslog:
+   host: 10.24.248.118
+   buffer: "16384"
+
+ntp:
+   server1: 143.166.226.32
+   server2: 143.166.255.32
+
+snmp: 
+  contact: dellnoc@networks.dell.com
+  location: Austin-TX
+  ro:
+   - public123
+   - ntc123
+  rw:
+   - private123
+
+qos_in_classify: CLASSIFY_TRAFFIC_REV1
+qos_in_policy: QOS_POLICY_REV1
+qos_out_shape: SHAPE_QOS_BASIC_WAN
+
+
+
+
+
+
+
+

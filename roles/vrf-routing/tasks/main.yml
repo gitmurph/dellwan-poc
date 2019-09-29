@@ -1,0 +1,8 @@
+---
+
+- name: write vrf routing config
+  ios_config:
+    authorize: yes
+    src: "templates/vrfrouting.j2"
+    provider: "{{ ios_provider }}"
+  tags: routing

@@ -1,0 +1,111 @@
+---
+
+- name: write interfaces config
+  ios_config:
+    authorize: yes
+    src: "templates/interfaces.j2"
+    provider: "{{ ios_provider }}"
+  tags: wic  
+
+- name: bring up WAN interface and apply service policy
+  ios_config:
+    authorize: yes
+    lines:
+      - description wan connection vzb-dublin
+      - no ip address
+      - duplex auto
+      - speed auto
+      - media-type rj45
+      - "service-policy output {{qos_out_shape}}"
+    after:
+      - no shut
+    parents: "interface GigabitEthernet0/1"
+    match: exact
+    provider: "{{ ios_provider }}"
+
+
+- name: bring up LAN interface 
+
+  ios_config:
+    authorize: yes
+    lines:
+      - no ip address
+      - duplex auto
+      - speed auto
+      - media-type rj45
+    after:
+      - no shut
+    parents: "interface GigabitEthernet0/2"
+    match: exact
+    provider: "{{ ios_provider }}"   
+
+
+
+- name: Apply QOS Policy to LAN Subinterfaces    
+
+  ios_config:
+    authorize: yes    
+    lines:
+      - "service-policy input {{qos_in_classify}}"
+    parents: "{{ item }}"
+    provider: "{{ ios_provider }}"   
+  with_items:
+      - interface GigabitEthernet0/2.10
+      - interface GigabitEthernet0/2.20
+      - interface GigabitEthernet0/2.30
+      - interface GigabitEthernet0/2.40
+  when: inventory_hostname == "cwdwan01"
+
+
+- name: Apply QOS Policy to LAN Subinterfaces    
+
+  ios_config:
+    authorize: yes    
+    lines:
+      - "service-policy input {{qos_in_classify}}"
+    parents: "{{ item }}"
+    provider: "{{ ios_provider }}"   
+  with_items:
+      - interface GigabitEthernet0/2.110
+      - interface GigabitEthernet0/2.120
+      - interface GigabitEthernet0/2.130
+      - interface GigabitEthernet0/2.140
+  when: inventory_hostname == "cwdwan02"
+
+
+
+- name: Apply QOS Policy to LAN Subinterfaces    
+
+  ios_config:
+    authorize: yes    
+    lines:
+      - "service-policy input {{qos_in_classify}}"
+    parents: "{{ item }}"
+    provider: "{{ ios_provider }}"   
+  with_items:
+      - interface GigabitEthernet0/2.10
+      - interface GigabitEthernet0/2.20
+      - interface GigabitEthernet0/2.30
+      - interface GigabitEthernet0/2.40
+  when: inventory_hostname == "emfwan01"  
+
+
+- name: Apply QOS Policy to LAN Subinterfaces    
+
+  ios_config:
+    authorize: yes    
+    lines:
+      - "service-policy input {{qos_in_classify}}"
+    parents: "{{ item }}"
+    provider: "{{ ios_provider }}"   
+  with_items:
+      - interface GigabitEthernet0/2.110
+      - interface GigabitEthernet0/2.120
+      - interface GigabitEthernet0/2.130
+      - interface GigabitEthernet0/2.140
+  when: inventory_hostname == "emfwan02"  
+
+
+
+
+

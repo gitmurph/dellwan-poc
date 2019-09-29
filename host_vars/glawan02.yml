@@ -1,0 +1,23 @@
+---
+
+hostname: glawan02
+domain_name: networks.dell.com
+
+celoopback:
+  address: 192.233.0.40
+  mask: 255.255.255.255
+
+
+interfaces:
+  0/1.220:
+    alias: connection pe-paris
+    bandwidth: 20000
+    vlan: 201
+    address: 192.168.220.2
+    mask: 255.255.255.252
+
+
+bgp:
+  asn: 65155
+  neighbor:
+    - {address: 192.168.220.1, remote_as: 1}

@@ -1,0 +1,68 @@
+!
+class-map match-any Call_Signaling
+ match protocol sip
+ match protocol rtcp
+ match protocol skinny
+ match protocol h323
+ match access-group name SilverPeak_AF31
+class-map match-any Critical_Data
+ match protocol ssh
+ match protocol telnet
+ match protocol citrix
+ match access-group name SilverPeak_AF21
+class-map match-any Interactive_Video
+ match protocol rtp video 
+ match access-group name SilverPeak_AF41
+class-map match-any Network_Control
+ match protocol bgp
+ match access-group name SilverPeak_CS6
+class-map match-any Voice
+ match protocol rtp audio 
+ match access-group name SilverPeak_EF
+class-map match-any class_default
+  description <<Best Effort>>
+ match any
+class-map match-any Scavenger
+ match protocol edonkey
+ match protocol novadigm
+!
+policy-map {{ qos_in_policy }}
+ class Voice
+  priority percent 15
+ class Interactive_Video
+  bandwidth percent 25 
+ class Call_Signaling
+  bandwidth percent 4 
+ class Network_Control
+  bandwidth percent 2 
+ class Critical_Data
+  bandwidth percent 27 
+  random-detect dscp-based
+ class class-default
+  bandwidth percent 25 
+  random-detect
+  queue-limit 1024 packets
+!
+policy-map {{ qos_out_shape }}
+ class class-default
+ {% if interfaces is defined %}
+ {% for port, value in interfaces.items() %}
+ {% if 'qosbw' in value %}
+ shape average {{ value.qosbw * 1000 }} account user-defined 18
+ {% endif %}
+ {% endfor %}
+ {% endif %}
+   service-policy {{ qos_in_policy }}
+policy-map {{ qos_in_classify }}
+ class Voice
+  set dscp ef
+ class Interactive_Video
+  set dscp af41
+ class Call_Signaling
+  set dscp af31
+ class Network_Control
+  set dscp cs6
+ class Critical_Data
+  set dscp af21
+ class class-default
+  set dscp default

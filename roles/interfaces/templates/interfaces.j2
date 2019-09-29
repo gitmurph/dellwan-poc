@@ -1,0 +1,24 @@
+{% if loopback is defined %}
+interface Loopback0
+ ip address {{ loopback.address }} {{ loopback.mask }}
+{% endif %}
+{% if interfaces is defined %}
+{% for port, value in interfaces.items() %}
+interface GigabitEthernet{{ port }}
+{% if 'vlan' in value %}
+ encapsulation dot1Q {{ value.vlan }}
+{% endif %}
+{% if 'intvrf' in value %}
+ ip vrf forwarding {{ value.intvrf }}
+{% endif %}
+{% if 'alias' in value %}
+ description {{ value.alias }}
+{% endif %}
+{% if 'bandwidth' in value %}
+ bandwidth {{ value.bandwidth }}
+{% endif %}
+{% if 'address', 'mask' in value %}
+ ip address {{ value.address }} {{ value.mask }}
+{% endif %}
+{% endfor %}
+{% endif %}

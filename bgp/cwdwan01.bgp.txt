@@ -1,0 +1,43 @@
+For address family: IPv4 Unicast
+BGP router identifier 172.1.0.111, local AS number 64712
+BGP table version is 14, main routing table version 14
+13 network entries using 1820 bytes of memory
+13 path entries using 1040 bytes of memory
+2/2 BGP path/bestpath attribute entries using 288 bytes of memory
+1 BGP AS-PATH entries using 24 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 3172 total bytes of memory
+BGP activity 13/0 prefixes, 13/0 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.100.1   4        65000      45      46       14    0    0 00:38:34        6
+
+For address family: VPNv4 Unicast
+BGP router identifier 172.1.0.111, local AS number 64712
+BGP table version is 1, main routing table version 1
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.10.60   4        65000      42      41        1    0    0 00:34:38        0
+192.168.20.70   4        65000      42      41        1    0    0 00:34:44        0
+192.168.30.40   4        65000      42      42        1    0    0 00:34:45        0
+192.168.40.50   4        65000      43      42        1    0    0 00:34:47        0Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override
+
+Gateway of last resort is 192.168.111.2 to network 0.0.0.0
+
+      10.0.0.0/8 is variably subnetted, 12 subnets, 2 masks
+B        10.10.0.0/24 [20/0] via 192.168.100.1, 00:30:15
+B        10.10.2.0/24 [20/0] via 192.168.100.1, 00:30:15
+B        10.10.3.0/24 [20/0] via 192.168.100.1, 00:30:15
+B        10.10.4.0/24 [20/0] via 192.168.100.1, 00:30:15
+      173.1.0.0/32 is subnetted, 1 subnets
+B        173.1.0.111 [20/0] via 192.168.100.1, 00:30:15
+B     192.168.117.0/24 [20/0] via 192.168.100.1, 00:30:15

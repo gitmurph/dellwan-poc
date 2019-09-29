@@ -1,0 +1,7 @@
+---
+
+- name: write ntp config
+  ios_config:
+    authorize: yes
+    src: "../templates/ntp.j2"
+    provider: "{{ ios_provider }}"
