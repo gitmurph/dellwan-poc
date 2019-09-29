@@ -34,6 +34,10 @@ vrf:
     rd: 64712:1301
     rt: 64712:1301
 
+  dellicorp-svx:
+    rd: 64712:2000
+    rt: 64712:2000
+
 
 
 interfaces: 
