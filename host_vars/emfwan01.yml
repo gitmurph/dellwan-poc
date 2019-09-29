@@ -19,8 +19,8 @@ vrf:
     rt: 64700:401 
 
   dellicorp-osp:
-    rd: 64700:101
-    rt: 64700:101
+    rd: 64700:601
+    rt: 64700:601
 
   dellicorp-svc:
     rd: 64700:201
