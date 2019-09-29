@@ -1,0 +1,34 @@
+[dellwan]
+cwdwan01 ansible_host=192.168.111.158
+cwdwan02 ansible_host=192.168.111.159
+emfwan01 ansible_host=192.168.111.161
+emfwan02 ansible_host=192.168.111.162
+frawan01 ansible_host=192.168.111.162
+frawan02 ansible_host=192.168.111.163
+glawan01 ansible_host=192.168.111.164
+glawan02 ansible_host=192.168.111.165
+
+
+[cwd]
+cwdwan01 ansible_host=192.168.111.158
+cwdwan02 ansible_host=192.168.111.159
+
+[emf]
+emfwan01 ansible_host=192.168.111.161
+emfwan02 ansible_host=192.168.111.162
+
+[fra]
+frawan01 ansible_host=192.168.111.162
+frawan02 ansible_host=192.168.111.163
+
+[gla]
+glawan01 ansible_host=192.168.111.164
+glawan02 ansible_host=192.168.111.165
+
+
+[all:vars]
+un=cisco
+pw=cisco
+ansible_os=ios
+authorize=yes
+
