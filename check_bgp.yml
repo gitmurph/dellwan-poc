@@ -1,0 +1,44 @@
+---
+
+- hosts: [cwd,emf]
+
+  connection: local
+  gather_facts: 'no'
+
+
+
+  tasks:
+    - name: print bgp neighbors and routing table to console 
+      ios_command:
+        commands:
+          - show bgp all summary
+          - show ip route bgp
+        provider: "{{ ios_provider }}"
+      register: bgp
+
+    - debug: var=bgp.stdout_lines[0]
+    - debug: var=bgp.stdout_lines[1]
+
+    
+
+    - name: write bgp neighbors and routing table to file
+      ios_command:
+        commands:
+          - show bgp all summary 
+          - show ip route bgp 
+        provider: "{{ ios_provider }}"
+      register: show      
+    - local_action:
+        copy content="{{ show.stdout[0] + show.stdout[1] }}" dest="/etc/ansible/Dell-WAN/dell-wan/bgp/{{inventory_hostname}}.bgp.txt"
+
+
+      
+    - name: write running config to file
+      ios_command:
+        commands:
+          - term length 0
+          - show running-config 
+        provider: "{{ ios_provider }}"
+      register: show_run      
+    - local_action:
+        copy content="{{ show_run.stdout[1] }}" dest="/etc/ansible/Dell-WAN/dell-wan/cfg/{{inventory_hostname}}.run.txt"

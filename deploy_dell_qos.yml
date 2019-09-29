@@ -1,0 +1,9 @@
+---
+
+- hosts: dellwan
+
+  connection: local
+  gather_facts: 'no'
+
+  roles:
+    - qos

@@ -1,0 +1,21 @@
+---
+
+- hosts: dellwan
+
+  connection: local
+  gather_facts: 'no'
+
+  roles:
+    - hostname
+    - snmp
+    - syslog
+    - ntp
+    - qos
+    - vrf
+    - interfaces
+    - vrf-routing 
+
+
+
+
+
