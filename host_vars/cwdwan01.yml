@@ -10,31 +10,31 @@ loopback:
 
 vrf:
 
-  dellcorp-labs:
+  xxx-labs:
     rd: 64712:301
     rt: 64712:301
 
-  dellicorp-odm:
+  xxxxxx-odm:
     rd: 64712:401
     rt: 64712:401 
 
-  dellicorp-osp:
+  xxxxxx-osp:
     rd: 64712:101
     rt: 64712:101
 
-  dellicorp-svc:
+  xxxxxx-svc:
     rd: 64712:201
     rt: 64712:201
 
-  dellicorp-svs:
+  xxxxxx-svs:
     rd: 64712:1201
     rt: 64712:1201
 
-  dellicorp-svd:
+  xxxxxx-svd:
     rd: 64712:1301
     rt: 64712:1301
 
-  dellicorp-svx:
+  xxxxxx-svx:
     rd: 64712:2000
     rt: 64712:2000
 
@@ -57,7 +57,7 @@ interfaces:
     vlan: 101
     address: 192.168.10.2
     mask: 255.255.255.0
-    intvrf: dellicorp-osp   
+    intvrf: xxxxxx-osp   
 
 
   0/1.201:
@@ -66,7 +66,7 @@ interfaces:
     vlan: 201
     address: 192.168.20.2
     mask: 255.255.255.0
-    intvrf: dellicorp-svc  
+    intvrf: xxxxxx-svc  
 
   0/1.301:
     alias: sp-VzB bw-300M ty-MPLS id-W0Z61461 loc-CWD
@@ -83,7 +83,7 @@ interfaces:
     vlan: 401
     address: 192.168.40.2
     mask: 255.255.255.0
-    intvrf: dellicorp-odm
+    intvrf: xxxxxx-odm
 
 
   0/2.10:
@@ -120,9 +120,9 @@ bgp:
 
   ipv4: 
     - {pe: 192.168.30.40, remote_as: 65000, cvrf: dellcorp-labs}
-    - {pe: 192.168.40.50, remote_as: 65000, cvrf: dellicorp-odm}
-    - {pe: 192.168.10.60, remote_as: 65000, cvrf: dellicorp-osp}
-    - {pe: 192.168.20.70, remote_as: 65000, cvrf: dellicorp-svc}
+    - {pe: 192.168.40.50, remote_as: 65000, cvrf: xxxxxx-odm}
+    - {pe: 192.168.10.60, remote_as: 65000, cvrf: xxxxxx-osp}
+    - {pe: 192.168.20.70, remote_as: 65000, cvrf: xxxxxx-svc}
 
 
 ospf:

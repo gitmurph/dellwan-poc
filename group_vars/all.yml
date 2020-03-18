@@ -17,8 +17,8 @@ ntp:
    server2: 143.166.255.32
 
 snmp: 
-  contact: dellnoc@networks.dell.com
-  location: Austin-TX
+  contact: me@home.com
+  location: MNX
   ro:
    - public123
    - ntc123
